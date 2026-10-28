@@ -15,18 +15,24 @@ A manual relay needs no automatic subagent dispatch, avoiding the extra agent co
 This example uses Astra and 6.1 Sol. You make every model switch manually:
 
 ```mermaid
+---
+config:
+  htmlLabels: false
+---
 flowchart TD
-    A["Astra: planning and key design decisions"] --> B["You review the plan and switch models"]
-    B --> C["6.1 Sol: implement, verify, and update the task document"]
-    C --> D{"Significant design deviation or hard-to-diagnose problem?"}
-    D -->|Yes| E["Record evidence and open questions; return to Astra"]
-    E --> F["You approve the revised plan and switch back to Sol"]
+    A["Astra<br/>Plan and design"] --> B["You review the plan<br/>and switch models"]
+    B --> C["6.1 Sol<br/>Implement and verify<br/>Update the task document"]
+    C --> D{"Design deviation<br/>or difficult bug?"}
+    D -->|Yes| E["Record evidence<br/>and open questions<br/>Ask Astra to assess"]
+    E --> F["You approve the plan<br/>and switch back to Sol"]
     F --> C
-    D -->|No, implementation and verification complete| G{"High-risk change?"}
-    G -->|Yes| H["Astra: final review of the diff and verification evidence"]
-    G -->|No| I["Review as needed and deliver"]
+    D -->|No| K["Implementation and<br/>verification complete"]
+    K --> G{"High-risk change?"}
+    G -->|Yes| H["Astra: final review<br/>Check diff and evidence"]
+    G -->|No| I["Review as needed<br/>Deliver the result"]
     H --> J{"Revisions needed?"}
-    J -->|Yes, record revision items| C
+    J -->|Yes| L["Record revision items<br/>Switch back to Sol"]
+    L --> C
     J -->|No| I
 ```
 
