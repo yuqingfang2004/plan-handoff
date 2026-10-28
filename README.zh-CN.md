@@ -1,0 +1,68 @@
+# plan-handoff · 规划与实施交接
+
+[English](README.md)
+
+一个轻量 Agent Skill：**先规划，手动切换模型，再依据同一份任务文档接续实施。**
+
+由你选择规划和实施所用的模型，决定何时切换、何时审查。任务文档传递修改范围、关键决策、进度和验收证据，减少交接时的重复调查。
+
+## 使用方式
+
+1. 要求使用 `plan-handoff` 规划任务；模型读取必要上下文，写出计划，在实施前结束规划阶段。
+2. 审阅计划，手动切换到实施模型。
+3. 要求按计划实施；模型核对工作区后接续工作，记录实际验证结果。
+4. 需要时再要求审查，核对差异和验收依据。
+
+Codex 安装后的示例：
+
+```text
+使用 $plan-handoff，先规划 CSV 导出功能，将任务文档写入
+plans/csv-export.md。只做规划，之后我会切换模型实施。
+
+（手动切换模型后）
+使用 $plan-handoff，按 plans/csv-export.md 实施。
+```
+
+可以在同一对话切换，也可以由新对话接手。新对话需要访问项目、计划和适用规则；具体调用语法由客户端决定。
+
+## 安装
+
+将本仓库文件夹放入客户端的 Skill 目录，目录名保持 `plan-handoff`，并保留 [SKILL.md](SKILL.md) 与 [templates/task.md](templates/task.md) 的相对位置。当前核心说明和模板为中文，发现描述为中英双语。
+
+Codex 的用户级目录可使用 `~/.agents/skills/plan-handoff`。下载或克隆仓库后，可复制到这里。Linux／macOS 的开发工作区也可以用软链接：
+
+```sh
+# 将源路径替换为实际仓库路径；目标目录不能已存在。
+mkdir -p "$HOME/.agents/skills"
+ln -s /absolute/path/to/plan-handoff "$HOME/.agents/skills/plan-handoff"
+```
+
+客户端没有发现新 Skill 时，重新启动或刷新。其他客户端按其安装说明操作。也可以不安装，直接让模型读取开发目录中的 `SKILL.md`。
+
+[agents/openai.yaml](agents/openai.yaml) 仅提供可选 Codex 显示信息，通用流程不依赖它。其他客户端可以忽略或省略这个文件；格式通用不代表所有客户端都已实测。
+
+## 任务文档
+
+优先使用项目已有计划，或采用[任务模板](templates/task.md)。记录目标、边界、工作区基线、关键决策、任务与验收条件、当前进度和下一步；源码和日志用路径引用，不复制完整聊天与实现。
+
+任务文档放在目标项目中，不放入 Skill 安装目录。按任务复杂度控制长度，小改动不必写大型计划。
+
+## 范围与验证
+
+本仓库只有指令和模板，没有运行脚本、hooks、API 调用、自动模型路由或必需的配套 Skill。说明用于指导模型，不是沙箱或强制权限机制。
+
+目前已检查格式、相对引用及移除 Codex 配置后的可搬移性，并完成一次真实“规划→手动切模型→实施”试用：实施者核对仓库后，正确处理了“没有更新”的路径。该试用通过直接读取文件调用，没有验证安装后的自动发现。
+
+有代码修改的执行、工作区冲突、新对话交接、其他客户端和额度节省，尚未独立验收。不承诺节省比例。详见[设计与验证说明](DESIGN.md)。
+
+## 参与改进
+
+反馈请提供具体场景、预期与实际表现，优先使用小示例并去除项目私密信息。修改应保持核心简短、遵循用户授权，仅在有实际需求时增加依赖。
+
+## 参考项目
+
+设计讨论参考了 [Planning with Files](https://github.com/OthmanAdi/planning-with-files)、[handoff-skill](https://github.com/ToolMonsters/handoff-skill)、[OpenSpec](https://github.com/Fission-AI/OpenSpec) 和 [Spec Kit](https://github.com/github/spec-kit)。这些是参考项目，不是打包依赖；使用本 Skill 也不要求安装 Superpowers。
+
+## 许可
+
+[MIT](LICENSE)。

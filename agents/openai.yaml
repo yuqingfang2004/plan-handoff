@@ -1,0 +1,4 @@
+interface:
+  display_name: "规划与实施交接"
+  short_description: "支持手动切换模型，以简短任务文档交接规划、实施进度与验收依据"
+  default_prompt: "使用 $plan-handoff，按我当前要求的阶段规划、接续实施或审查任务；复用已有任务文件，由我手动切换模型。"
