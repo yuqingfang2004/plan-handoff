@@ -6,7 +6,7 @@ A lightweight Agent Skill for **planning, manually switching models, and resumin
 
 This project started with a practical frustration: running an entire development workflow with Astra and Superpowers made even a Pro allowance feel tight. We wanted to reserve the higher-cost model for important decisions and let a more economical model handle the implementation work.
 
-plan-handoff turns that division into a resumable plan. For example, let Astra plan, manually switch to 6.1 Sol for implementation, and return for review when needed. You can still use Superpowers for planning or debugging; this independent skill handles the handoff.
+plan-handoff turns that division into a resumable plan. For example, let Astra plan, then manually switch to 6.1 Sol for implementation. If implementation calls for a significant design deviation or encounters a hard-to-diagnose problem, record the evidence and open questions, then manually switch back to Astra for a decision. For high-risk changes, return to Astra for a final review after implementation and verification. You can still use Superpowers for planning or debugging; this independent skill handles the handoff.
 
 A manual relay needs no automatic subagent dispatch, avoiding the extra agent contexts, task distribution, and report aggregation that such orchestration would introduce. The task document carries scope, key decisions, progress, and verification evidence; source files and logs are read as needed. You choose the models and when to switch.
 
@@ -17,7 +17,8 @@ A manual relay needs no automatic subagent dispatch, avoiding the extra agent co
 1. Ask the agent to use `plan-handoff` to plan a task. It examines the relevant project context and writes a concise plan, without implementing the change.
 2. Review the plan and manually select the implementation model.
 3. Ask the agent to read that plan and implement it. It checks the workspace, continues authorized work, and records verification results.
-4. Request a review when useful. The reviewer checks changes and evidence against the plan.
+4. For significant design deviations or hard-to-diagnose problems, update the task document with evidence and open questions, then manually return to the planning model for a decision before continuing.
+5. For high-risk changes, manually return to the planning model for a final review after implementation and verification. The reviewer checks changes and evidence against the plan; review other changes as needed.
 
 Example prompts in Codex after installation:
 
