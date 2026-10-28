@@ -4,7 +4,13 @@
 
 A lightweight Agent Skill for **planning, manually switching models, and resuming implementation from one task document**.
 
-Use a model of your choice to make the important decisions, then switch to another model to implement them. The handoff carries scope, decisions, progress, and verification evidence. You control when to switch models and when to request a review.
+This project started with a practical frustration: running an entire development workflow with Astra and Superpowers made even a Pro allowance feel tight. We wanted to reserve the higher-cost model for important decisions and let a more economical model handle the implementation work.
+
+plan-handoff turns that division into a resumable plan. For example, let Astra plan, manually switch to 6.1 Sol for implementation, and return for review when needed. You can still use Superpowers for planning or debugging; this independent skill handles the handoff.
+
+A manual relay needs no automatic subagent dispatch, avoiding the extra agent contexts, task distribution, and report aggregation that such orchestration would introduce. The task document carries scope, key decisions, progress, and verification evidence; source files and logs are read as needed. You choose the models and when to switch.
+
+**Put the reasoning where it matters. Make the budget count.**
 
 ## How to use
 
@@ -61,7 +67,7 @@ Report a concrete situation, expected behavior, and observed behavior. Prefer a 
 
 ## Related work
 
-The design discussion considered [Planning with Files](https://github.com/OthmanAdi/planning-with-files), [handoff-skill](https://github.com/ToolMonsters/handoff-skill), [OpenSpec](https://github.com/Fission-AI/OpenSpec), and [Spec Kit](https://github.com/github/spec-kit). They are references, not bundled dependencies. Superpowers is also optional and is not required to run this skill.
+The design discussion considered [Planning with Files](https://github.com/OthmanAdi/planning-with-files), [handoff-skill](https://github.com/ToolMonsters/handoff-skill), [OpenSpec](https://github.com/Fission-AI/OpenSpec), and [Spec Kit](https://github.com/github/spec-kit). They are references, not bundled dependencies.
 
 ## License
 

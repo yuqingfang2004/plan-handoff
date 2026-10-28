@@ -4,7 +4,13 @@
 
 一个轻量 Agent Skill：**先规划，手动切换模型，再依据同一份任务文档接续实施。**
 
-由你选择规划和实施所用的模型，决定何时切换、何时审查。任务文档传递修改范围、关键决策、进度和验收证据，减少交接时的重复调查。
+这个项目起于一个实际烦恼：用 Astra 配合 Superpowers 跑完整个开发流程，即使订阅了 Pro，也觉得额度消耗得太快。我们希望把高成本模型留给关键决策，让更经济的模型接手大量实施工作。
+
+plan-handoff 把这个分工变成一份可接续的计划：例如让 Astra 规划，手动切到 6.1 Sol 实施，需要时再回来审查。Superpowers 可以继续用于你需要的规划或调试环节，交接本身由这个独立 Skill 完成。
+
+手动接力无需自动派遣子代理，省去为交接额外建立代理上下文、分派任务和汇总回报的环节。任务文档只传递范围、关键决策、进度和验收依据，源码与日志按需读取。模型组合和切换时机都由你决定。
+
+**把聪明用在关键处，做个精打细算的“能工智人”。**
 
 ## 使用方式
 
@@ -61,7 +67,7 @@ ln -s /absolute/path/to/plan-handoff "$HOME/.agents/skills/plan-handoff"
 
 ## 参考项目
 
-设计讨论参考了 [Planning with Files](https://github.com/OthmanAdi/planning-with-files)、[handoff-skill](https://github.com/ToolMonsters/handoff-skill)、[OpenSpec](https://github.com/Fission-AI/OpenSpec) 和 [Spec Kit](https://github.com/github/spec-kit)。这些是参考项目，不是打包依赖；使用本 Skill 也不要求安装 Superpowers。
+设计讨论参考了 [Planning with Files](https://github.com/OthmanAdi/planning-with-files)、[handoff-skill](https://github.com/ToolMonsters/handoff-skill)、[OpenSpec](https://github.com/Fission-AI/OpenSpec) 和 [Spec Kit](https://github.com/github/spec-kit)。这些是参考项目，不是打包依赖。
 
 ## 许可
 
