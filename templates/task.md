@@ -1,50 +1,50 @@
-# 任务名称
+# Task name
 
-> 用具体信息替换说明文字；已有计划只补缺项。小任务可合并栏目，不适用的字段可删除。路径默认相对下方项目根，不粘贴完整源码或日志。
+> Replace the guidance with concrete information; add only missing fields to an existing plan. Combine sections for small tasks and remove fields that do not apply. Paths are relative to the project root below unless stated otherwise. Do not paste entire source files or logs.
 
-## 目标与范围
+## Goal and scope
 
-- 目标与可观察的完成结果：
-- 包含／不包含的内容：
-- 已获授权与需另行确认的动作：
+- Goal and observable completion outcome:
+- Included and excluded work:
+- Existing authorization and actions requiring separate confirmation:
 
-## 工作现场
+## Workspace
 
-- 项目根／跨机器路径映射（适用时）：
-- 分支与基线提交，或输入产物版本：
-- 已有未提交修改及归属；无法确认的内容：
-- 适用的项目规则与相关文件／符号：
+- Project root and cross-machine path mappings, if applicable:
+- Branch and baseline commit, or input artifact version:
+- Existing uncommitted changes, their ownership, and anything uncertain:
+- Applicable project rules and relevant files or symbols:
 
-## 决策与未决问题
+## Decisions and open questions
 
-| 事项 | 决策或问题 | 依据／路径 | 是否影响实施 |
+| Item | Decision or question | Evidence or path | Effect on implementation |
 | --- | --- | --- | --- |
-| 填写必要事项 | 区分已确认、建议与未知 | 只引用必要证据 | 是／否及原因 |
+| Record necessary items | Distinguish confirmed decisions, proposals, and unknowns | Reference only relevant evidence | Whether it affects implementation and why |
 
-## 实施与验收
+## Implementation and acceptance
 
-状态可用：未开始、实施中、实现完成待验收、验收通过、受阻、不适用（说明原因）。每项对应一个可检查结果，按需增加行。
+Suggested statuses: not started, in progress, implementation complete / acceptance pending, acceptance passed, blocked, or not applicable with a reason. Each item should describe a verifiable outcome. Add rows as needed.
 
-| 项目 | 影响文件／产物 | 验收方法与通过条件 | 当前状态 | 证据位置 |
+| Item | Affected files or artifacts | Validation method and passing condition | Current status | Evidence location |
 | --- | --- | --- | --- | --- |
-| 填写交付结果 | 位置及必要接口约束 | 具体行为与检查方式 | 未开始 | 未运行 |
+| Describe the deliverable | Location and necessary interface constraints | Observable behavior and how to check it | Not started | Not run |
 
-## 当前进度与下一步
+## Current progress and next step
 
-- 当前阶段：规划／实施／审查。
-- 本次已完成：
-- 进行中／待验收／阻塞（无则写无）：
-- 下一步与接手提示：
-- 对计划有影响的变更及确认依据（仅发生时记录）：
+- Current stage: planning / implementation / review.
+- Completed in this session:
+- In progress, awaiting acceptance, or blocked; write "none" if empty:
+- Next step and handoff prompt:
+- Changes affecting the plan and their authorization or evidence, if any:
 
-## 验证记录
+## Validation record
 
-仅列本任务相关证据；新修改使旧结果失效时注明，不把历史结果作为当前通过依据。
+Include only evidence relevant to this task. Note when new changes invalidate earlier results; do not present historical results as current acceptance.
 
-| 被测版本或快照（含相关未提交差异） | 环境与范围 | 命令／检查方法 | 结果与退出码（适用时） | 日志／产物路径 |
+| Tested version or snapshot, including relevant uncommitted changes | Environment and scope | Command or inspection method | Result and exit code, if applicable | Log or artifact path |
 | --- | --- | --- | --- | --- |
-| 填写实际版本 | 本地／远端、平台等 | 实际执行内容 | 未运行 | 无 |
+| Record the actual version | Local or remote, platform, and other relevant context | What was actually executed | Not run | None |
 
-未完成验收及原因：
+Incomplete acceptance checks and reasons:
 
-审查结论与检查范围（仅用户要求审查时填写）：
+Review conclusion and scope, only when the user requests a review:

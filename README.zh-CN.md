@@ -58,7 +58,7 @@ plans/csv-export.md。只做规划，之后我会切换模型实施。
 
 ## 安装
 
-将本仓库文件夹放入客户端的 Skill 目录，目录名保持 `plan-handoff`，并保留 [SKILL.md](SKILL.md) 与 [templates/task.md](templates/task.md) 的相对位置。当前核心说明和模板为中文，发现描述为中英双语。
+将本仓库文件夹放入客户端的 Skill 目录，目录名保持 `plan-handoff`，并保留 [SKILL.md](SKILL.md) 与 [templates/task.md](templates/task.md) 的相对位置。技能说明、发现描述、显示名称、默认提示和任务模板统一使用英文；仅本 README 保留中文。安装后的显示名称为 `Plan Handoff`。
 
 Codex 的用户级目录可使用 `~/.agents/skills/plan-handoff`。下载或克隆仓库后，可复制到这里。Linux／macOS 的开发工作区也可以用软链接：
 

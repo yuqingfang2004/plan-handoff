@@ -1,6 +1,6 @@
 # plan-handoff
 
-[中文说明](README.zh-CN.md)
+[Chinese README](README.zh-CN.md)
 
 A lightweight Agent Skill for **planning, manually switching models, and resuming implementation from one task document**.
 
@@ -58,7 +58,7 @@ The same conversation and a fresh conversation can both use the task file. New s
 
 ## Installation
 
-Put this folder in your client's skill directory under the name `plan-handoff`. Keep [SKILL.md](SKILL.md) and [templates/task.md](templates/task.md) together. The runtime content is currently written in Chinese, with a bilingual discovery description.
+Put this folder in your client's skill directory under the name `plan-handoff`. Keep [SKILL.md](SKILL.md) and [templates/task.md](templates/task.md) together. Skill instructions, discovery and display metadata, and the task template are in English. A Chinese README is available separately.
 
 For Codex, a user-level location is `~/.agents/skills/plan-handoff`. Once you have downloaded or cloned the repository, you can copy its files there. For a development checkout on Linux or macOS, an alternative is a symbolic link:
 
