@@ -12,6 +12,24 @@ A manual relay needs no automatic subagent dispatch, avoiding the extra agent co
 
 **Put the reasoning where it matters. Make the budget count.**
 
+This example uses Astra and 6.1 Sol. You make every model switch manually:
+
+```mermaid
+flowchart TD
+    A["Astra: planning and key design decisions"] --> B["You review the plan and switch models"]
+    B --> C["6.1 Sol: implement, verify, and update the task document"]
+    C --> D{"Significant design deviation or hard-to-diagnose problem?"}
+    D -->|Yes| E["Record evidence and open questions; return to Astra"]
+    E --> F["You approve the revised plan and switch back to Sol"]
+    F --> C
+    D -->|No, implementation and verification complete| G{"High-risk change?"}
+    G -->|Yes| H["Astra: final review of the diff and verification evidence"]
+    G -->|No| I["Review as needed and deliver"]
+    H --> J{"Revisions needed?"}
+    J -->|Yes, record revision items| C
+    J -->|No| I
+```
+
 ## How to use
 
 1. Ask the agent to use `plan-handoff` to plan a task. It examines the relevant project context and writes a concise plan, without implementing the change.
