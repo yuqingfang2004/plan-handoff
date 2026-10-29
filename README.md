@@ -48,17 +48,17 @@ Example prompts in Codex after installation:
 
 ```text
 Use $plan-handoff to plan adding CSV export. Save the task document to
-plans/csv-export.md. Plan only; I will switch models before implementation.
+handoffs/2026-10-29-csv-export/plan.md. Plan only; I will switch models before implementation.
 
 [After switching models]
-Use $plan-handoff to implement plans/csv-export.md.
+Use $plan-handoff to implement handoffs/2026-10-29-csv-export/plan.md.
 ```
 
 The same conversation and a fresh conversation can both use the task file. New sessions need access to the project, plan, and applicable instructions. Invocation syntax depends on the host.
 
 ## Installation
 
-Put this folder in your client's skill directory under the name `plan-handoff`. Keep [SKILL.md](SKILL.md) and [templates/task.md](templates/task.md) together. Skill instructions, discovery and display metadata, and the task template are in English. A Chinese README is available separately.
+Put this folder in your client's skill directory under the name `plan-handoff`. Keep [SKILL.md](SKILL.md) and [templates/plan.md](templates/plan.md) together. Skill instructions, discovery and display metadata, and the task template are in English. A Chinese README is available separately.
 
 For Codex, a user-level location is `~/.agents/skills/plan-handoff`. Once you have downloaded or cloned the repository, you can copy its files there. For a development checkout on Linux or macOS, an alternative is a symbolic link:
 
@@ -74,9 +74,30 @@ Restart or refresh the client if it does not discover the skill. For other clien
 
 ## What belongs in the task document
 
-Use the project's existing plan, or start with the [task template](templates/task.md). Record the goal, boundaries, workspace baseline, important decisions, tasks, acceptance conditions, current state, and next step. Reference source files and logs instead of copying entire transcripts or implementations.
+Each task gets one dedicated `plan.md`, using the [plan template](templates/plan.md). Existing user plans, notes, and handoffs are reference sources; the skill does not rewrite them as progress logs unless explicitly asked. Record scope, baseline, decisions, acceptance criteria, current state, and the next handoff. Reference source and logs instead of copying them.
 
-Task documents live in the target project, not in this skill's installation folder. Adjust the detail to the task; a small change does not need a large plan.
+By default, create `handoffs/YYYY-MM-DD-<topic>/plan.md` in the target project. Different tasks use different folders; the filename stays `plan.md`. Honor a user-designated location and keep existing dedicated plans at their current paths, including legacy paths.
+
+| Situation | What happens |
+| --- | --- |
+| Switch model or conversation, resume another day, implement, or review | Update the same plan |
+| Revise the approach or fix acceptance failures within the same goal | Update the same plan and preserve important decision changes |
+| Add an independently deliverable goal or subtask | Create a linked plan in a new task folder |
+| Replace the goal entirely | Create a successor and mark the old plan superseded, not completed |
+| Discover incomplete work behind a completion claim | Reopen the original plan and mark invalid evidence |
+| The document becomes long | Consolidate current state; do not create another version just for length |
+
+Update progress in place and keep concise decision history. Completed plans stay at stable paths. With multiple tasks, use one lightweight collection index (normally `handoffs/index.md`) for links, goal summaries, and statuses; detailed state stays in each plan. Small tasks can combine template sections.
+
+## Handoff prompts
+
+At each actual handoff, the agent updates the plan and supplies its exact path, a suggested role, and a copyable prompt. It uses your model preferences, or generic role names if none are known. These are manual switches, not automatic dispatch:
+
+- **Ready to implement:** suggest a more economical implementation model; the prompt asks it to check the workspace, implement the confirmed scope, verify it, and update the same plan. Any pending approval is stated explicitly.
+- **Decision needed:** suggest returning to the planning model; the prompt points to the specific question, evidence, attempted approaches, and options. It asks for a decision, not unauthorized implementation.
+- **Review requested or recommended for high risk:** suggest a review model; the prompt asks it to inspect changes and evidence and record findings without editing implementation files.
+
+Planning completion does not grant execution permission. Ordinary implementation steps do not repeatedly ask you to switch, and a review recommendation does not start another model call.
 
 ## Scope and validation
 

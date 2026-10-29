@@ -18,10 +18,28 @@ The workflow is guidance, not an enforced state machine. It neither selects mode
 nor starts other agents, sends messages, changes branches, or publishes artifacts
 on its own authority.
 
+## Document lifecycle and handoffs
+
+Each task owns a dedicated `plan.md`; user-owned plans and notes are sources, not
+progress logs unless the user explicitly requests that edit. New plans default to
+`handoffs/YYYY-MM-DD-<topic>/plan.md`; existing dedicated plans retain their paths.
+Model or conversation switches, review corrections, and workspace changes do not
+by themselves create a new plan. Independent deliverables get linked plans;
+replacement goals supersede the old plan. Reopen incorrect completion claims,
+consolidate long documents, and retain completed plans in place. A lightweight
+collection index navigates multiple tasks without duplicating their details.
+
+At actual handoffs, update the plan and give its exact path, suggested role, and
+one copyable prompt. Implementation prompts preserve pending approval; decision
+prompts carry a specific question and evidence; review prompts authorize review,
+not implementation edits. Use the user's model preferences without hard-coding a
+required model or making an automatic call. Ordinary work does not trigger a
+handoff at every step.
+
 ## Structure
 
 - `SKILL.md`: stage selection, handoff, implementation, and reporting guidance.
-- `templates/task.md`: adaptable task document; existing project plans take priority.
+- `templates/plan.md`: a dedicated plan, with source references, lifecycle state, and the next handoff prompt.
 - `agents/openai.yaml`: optional Codex display metadata, not runtime requirements.
 - README files, this document, and `LICENSE`: public project documentation, not
   mandatory context for every invocation.
@@ -31,7 +49,17 @@ Task files belong to the target project. The skill should reference source and
 logs rather than copy them, and update progress at meaningful boundaries rather
 than on every tool call.
 
-## Validation status — 2026-10-28
+## Validation status — 2026-10-29
+
+The 2026-10-29 lifecycle and handoff-prompt revision passed local format,
+reference, UI metadata, and relocated-core checks. Author review covered source
+document preservation, continuation versus new tasks, supersession and reopening,
+filename collisions, and authorization in all three handoff prompts. These are
+static checks, not independent model behavior tests. The installed local symlink
+points to the revised source; client reload behavior was not independently tested.
+
+The earlier evidence below remains historical and does not validate the new
+lifecycle behavior:
 
 | Evidence | Result and limit |
 | --- | --- |
