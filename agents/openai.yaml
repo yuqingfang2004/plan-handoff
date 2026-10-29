@@ -1,4 +1,4 @@
 interface:
   display_name: "Plan Handoff"
-  short_description: "Plan, implement, and review through one task document"
-  default_prompt: "Use $plan-handoff for my requested stage, maintaining one dedicated plan.md per task and providing the next handoff prompt; I will switch models manually."
+  short_description: "Switch models, summarize plans, and archive covered work"
+  default_prompt: "Use $plan-handoff in plan-switch, plan-summary, or plan-clean mode according to my request. Preserve active plans and clearly name the next stage and required model role; I switch models manually."

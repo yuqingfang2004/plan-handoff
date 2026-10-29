@@ -1,87 +1,103 @@
 # Design and validation
 
-## Design contract
+## Contract
 
-The user controls model selection. One task document carries the goal, scope,
-important decisions, current state, and verification evidence between planning,
-implementation, and optional review. Both a model switch in the same conversation
-and a fresh conversation can use that document.
+One installed skill routes three modes. **plan-switch** preserves manual planning,
+implementation, decisions and review through one dedicated plan.md. **plan-summary**
+explains closed task outcomes without rewriting active execution context.
+**plan-clean** recoverably archives only summary-covered inactive sources under
+the same collection's archive/. The user chooses models and authorizes work.
 
-The latest user request determines the stage. A planning-only request ends with a
-handoff; an explicit request to implement an approved plan proceeds without asking
-for the same approval again. The plan records context rather than granting new
-permissions. Ordinary implementation choices stay with the implementer; changes
-to agreed scope, public interfaces, safety constraints, or significant architecture
-return to the user for a decision.
+Stage and mode are explicit. Every actual handoff displays next stage, required
+model role, manual action and exact plan path; the prompt repeats stage and role.
+No model call, agent dispatch, branch switch or publication follows merely from a
+stored plan. Review does not authorize implementation edits. Approval already
+provided is reused, not repeatedly requested.
 
-The workflow is guidance, not an enforced state machine. It neither selects models
-nor starts other agents, sends messages, changes branches, or publishes artifacts
-on its own authority.
+A new task uses handoffs/YYYY-MM-DD-topic/plan.md; old dedicated paths stay valid.
+Switching models, conversations, stages or days does not create a new task. New
+independent goals get linked plans. Reopen incorrect completion, record important
+decisions, and retain evidence without appending every conversation. User-owned
+plans and notes are references unless their edit was explicitly requested.
 
-## Document lifecycle and handoffs
+## Summary and cleanup
 
-Each task owns a dedicated `plan.md`; user-owned plans and notes are sources, not
-progress logs unless the user explicitly requests that edit. New plans default to
-`handoffs/YYYY-MM-DD-<topic>/plan.md`; existing dedicated plans retain their paths.
-Model or conversation switches, review corrections, and workspace changes do not
-by themselves create a new plan. Independent deliverables get linked plans;
-replacement goals supersede the old plan. Reopen incorrect completion claims,
-consolidate long documents, and retain completed plans in place. A lightweight
-collection index navigates multiple tasks without duplicating their details.
+Inactive means completed, cancelled or superseded, subject to evidence and
+remaining work. Blocked, pending acceptance/review and ambiguous plans are
+protected regardless of age. A summary can show short active-task snapshots but
+never certify them for cleanup. Cancellation does not mean implementation.
 
-At actual handoffs, update the plan and give its exact path, suggested role, and
-one copyable prompt. Implementation prompts preserve pending approval; decision
-prompts carry a specific question and evidence; review prompts authorize review,
-not implementation edits. Use the user's model preferences without hard-coding a
-required model or making an automatic call. Ordinary work does not trigger a
-handoff at every step.
+A cumulative summary.md retains old results after their sources are archived.
+Explicit per-task result blocks identify coverage. summary.manifest.json retains
+source, block and whole-summary hashes, status, evidence and archive mappings.
+Semantic accuracy remains an agent/user responsibility; the helper cannot prove it.
+Overview-only updates can refresh hashes; changing a result requires re-coverage.
+Old archived blocks are preserved; explicit corrections can be appended.
 
-## Structure
+Cleanup starts with a scoped preview and existing user authorization. If coverage
+is absent or stale, ask whether to summarize before cleaning unless the full chain
+was already authorized. The helper checks status, hashes, supported scoped links
+and non-symlink relative paths. It verifies a ZIP, publishes recovery mappings,
+redirects supported links and rechecks bytes before each original is removed.
+Only empty task directories are removed; logs and business files are preserved.
+Status comes from opening metadata, excluding examples and historical sections.
+LF and CRLF management markers are accepted without normalizing source hashes.
+References from other selected plans conservatively retain their targets, because
+a batch can partially fail. Navigation lists actual remaining sources after removal,
+including changed originals that already have a backup.
 
-- `SKILL.md`: stage selection, handoff, implementation, and reporting guidance.
-- `templates/plan.md`: a dedicated plan, with source references, lifecycle state, and the next handoff prompt.
-- `agents/openai.yaml`: optional Codex display metadata, not runtime requirements.
-- README files, this document, and `LICENSE`: public project documentation, not
-  mandatory context for every invocation.
+This is recoverable multi-file work, not a filesystem transaction. Metadata updates
+or removal may partially complete; errors must report retained files and the
+verified archive. Helper locks coordinate helper writers, not unrelated sessions
+or hostile path replacement. Reference detection is limited to declared roots and
+supported link syntax; known semantic dependencies need agent review. ZIPs are not
+automatically purged. Restore targets a new directory, checks hashes and approved
+relative members, and does not use extractall.
 
-No scripts, hooks, service dependencies, or companion skills are required.
-Task files belong to the target project. The skill should reference source and
-logs rather than copy them, and update progress at meaningful boundaries rather
-than on every tool call.
+## Files and dependencies
 
-## Validation status — 2026-10-29
+- SKILL.md: small router, shared protection and explicit handoff format.
+- references/plan-switch.md: planning, execution, recovery and review rules.
+- references/plan-summary.md and plan-clean.md: on-demand mode details and commands.
+- templates/plan.md and summary.md: user-facing artifact starters.
+- scripts/plan_store.py: optional Python 3.9+ standard-library helper; no network,
+  model or Git operations. Ordinary switch mode has no Python requirement.
+- tests/test_plan_store.py: temporary-fixture behavioral acceptance for the helper.
+- agents/openai.yaml: optional display metadata. README files and this design are
+  public documentation, not required context for every invocation.
 
-The 2026-10-29 lifecycle and handoff-prompt revision passed local format,
-reference, UI metadata, and relocated-core checks. Author review covered source
-document preservation, continuation versus new tasks, supersession and reopening,
-filename collisions, and authorization in all three handoff prompts. These are
-static checks, not independent model behavior tests. The installed local symlink
-points to the revised source; client reload behavior was not independently tested.
+Keep the complete folder when installing; moving only the old two-file core no
+longer includes the mode references. Removing optional Codex metadata is supported.
 
-The earlier evidence below remains historical and does not validate the new
-lifecycle behavior:
+## v0.2.0 validation — 2026-10-29
 
-| Evidence | Result and limit |
-| --- | --- |
-| Skill metadata | Local skill-creator format validator passed; this checks structure, not behavior. |
-| File references and UI fields | Local link, encoding, and display-field checks passed. |
-| Relocated core | Format and reference checks passed with only SKILL.md and the task template, without Codex metadata. |
-| Live handoff | One same-conversation planning-to-implementation trial, with a user-selected model change, completed a repository synchronization check. No new upstream commits existed; no unnecessary merge or new transfer artifact was created. |
-| Trial invocation | The agent read the local skill by path. Installed-skill discovery was not tested. |
+All 34 helper tests passed on Linux Python 3.9.21 and 3.13.13. A subsequent review
+verified source/log hashes and reran the 34 tests from an isolated source snapshot
+on Python 3.13.13, with no failures, errors or skips. It also checked later cleanup
+of a retained dependency target, CRLF summary link redirection, and ambiguous or
+unfinished metadata examples. No new blocking findings remained in that scope.
 
-The live trial covered the no-change path. It did not exercise changed-code
-implementation, merge conflicts, new-session recovery, or native integration in
-other clients. It had no control group, independent behavioral evaluator, or
-usage-cost measurement. Those outcomes remain unverified.
+Reproduce the packaged helper tests from the repository root:
 
-## Next useful evaluations
+```sh
+python -B -m unittest discover -s tests -v
+```
 
-Use a small disposable project to evaluate an implementation with meaningful
-acceptance checks. Then try a fresh conversation with an existing partial plan,
-and a workspace whose current state differs from the plan. Record actual artifacts,
-missed requirements, repeated investigation, and validation outcomes. Keep static
-checks, observed model behavior, and cost measurements separate.
+Temporary-fixture helper tests cover missing/stale summaries, empty result blocks,
+active/unknown statuses, reopening, path traversal/symlinks, retained references,
+unrelated management files, incremental archived results, unique archives,
+write/verification failures, post-backup source changes and byte-exact recovery.
+Regression tests also protect archived result blocks, unsupported summary links,
+and stale coverage belonging to a different plan. Review regressions cover fenced
+and commented status examples, real metadata versus historical states, same-batch
+dependencies in both orders, retained-source navigation, final navigation failures,
+and LF/CRLF archive/restore. No real project is cleaned.
 
-Additional model runs require the user's authorization. Do not infer successful
-behavior from the presence of a rule in SKILL.md or require an expensive evaluation
-suite for routine documentation edits.
+Author scenario review checks the explicit role block for pending versus confirmed
+execution, decisions, review and completion. Format, local references, optional UI
+metadata and relocation without Codex metadata are checked separately. These are
+local checks, not hosted CI, independent model behavior, native Windows or cost evaluations.
+
+An earlier manual model-switch trial completed a repository synchronization check
+with no upstream changes. It did not exercise the new modes or installed-client
+automatic discovery. Fresh-session behavior and cost savings remain unmeasured.

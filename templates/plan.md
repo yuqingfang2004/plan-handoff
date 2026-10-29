@@ -39,8 +39,11 @@ Suggested statuses: not started, in progress, implementation complete / acceptan
 
 - Current completed work (replace stale summaries rather than appending every session):
 - In progress, awaiting acceptance, or blocked; write "none" if empty:
-- Next action and suggested model role (use the user's model preference if known):
-- Copyable next prompt, including this plan's exact path, the requested stage, and authorization limits:
+- Next stage: planning/decision / implementation / review / finished.
+- Required model role: planning model / implementation model / review model / none; preferred model if known:
+- Manual action: select the required role's model; if already selected, no switch is needed.
+- Exact plan path and project root for the next conversation:
+- Copyable next prompt: explicitly repeat the NEXT STAGE and MODEL ROLE, this plan's path, stage-specific action, and authorization limits:
 - Changes affecting the plan and their authorization or evidence, if any:
 
 ## Validation record
