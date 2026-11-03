@@ -14,6 +14,29 @@ Follow the current user request. The stage recorded in the task document provide
 
 Ask one brief question only if the request and existing authorization do not establish the stage and the answer would determine whether project files should be modified. Do not infer the stage from a model name or claim to have switched or verified the model selected in the user's interface.
 
+## Explain the work to the user
+
+Before a handoff into implementation, explain the change in the conversation, then show the model-role block and prompt. Also give this briefing before substantive edits when implementation is directly authorized without a handoff. Cover the following as a short connected explanation, expanding only for complexity:
+
+- Where the work stands: overall goal, delivered capabilities, what remains, and why this round is needed.
+- The concrete current and intended behavior. For a bug, name the trigger and consequence; distinguish an established cause from a hypothesis.
+- How the change works: the relevant data flow, calls, decisions or state transitions that will change, and the important tradeoff. Name useful functions/classes with their responsibilities; do not substitute a file list or "fix and add tests" for the mechanism.
+- A concrete scenario that will demonstrate the result, plus material uncertainty or an action the user actually needs to decide.
+
+Use descriptive task and finding names. Optional IDs belong after the description, such as "Preserve navigation after a failed deletion (R2)"; never ask the user to remember codes alone. For a small change, a few sentences suffice. For a complex one, a small before/after example, pseudocode or diagram can help; do not narrate every line of code or every tool call.
+
+Keep the current explanation in the same plan, and make it visible in chat rather than saying only "read the plan". If the preceding handoff already explained unchanged scope, acknowledge it briefly instead of repeating it. On another review/fix round, explain only the new finding, its concrete effect, the proposed correction and the remaining work. Meaningful scope or approach changes need an updated explanation. Explaining authorized work is not an extra approval gate or a reason to force a model switch.
+
+## Keep one usable project and environment
+
+Identify and record the established source workspace, applicable environment/dependency manager and lockfiles, and the user's launch entry point before changing them. Task-document directories are not application directories. A new task, stage, model, conversation or review round does not justify creating another repository copy, worktree, virtual environment or dependency tree.
+
+Continue in the existing workspace unless concrete constraints require isolation. Reuse suitable existing environments; legitimate component/platform-specific environments need not be collapsed into one. Check their actual state, then install or update dependencies only when missing, declarations changed, or a diagnosed problem requires repair. Follow the project's existing tooling and pinned dependencies; do not recreate environments or reinstall everything as a ritual for each round.
+
+For software the user will try, record the working directory, environment selection, launch command and relevant URL/port in the plan. Check the existing entry point when resuming. At delivery, give the same usable entry point and any necessary dependency update, restart or changed command, with its reason. Distinguish verified execution from instructions that have not been run; do not claim a running process has loaded new code without checking. Service start/stop and changes to shared branches still require applicable authorization.
+
+When isolation is justified by conflicting dependencies, destructive experiments, concurrent ownership, or explicit project/user requirements, explain the reason before creating it. Record the isolated location, the canonical user-facing project, how results return there, and the retention/cleanup conditions. Avoid copying dependency directories and build caches into temporary source copies unless that is specifically needed. Do not silently promote an experiment directory to the user's new application entry point. Preserve existing artifacts and clean only authorized temporary scope; plan-clean authorization for Markdown plans does not authorize deleting environments or application copies.
+
 ## Maintain one dedicated plan per task
 
 Use a dedicated `plan.md`, separate from the user's existing plans, notes, and handoff documents. Treat those as reference sources: link them and extract only the confirmed constraints needed to proceed, without turning them into progress logs. An explicit user instruction to edit a particular file takes precedence.
@@ -42,7 +65,7 @@ Update the document at handoff, after meaningful progress, when a key decision c
 ## Planning
 
 1. Read the request, project rules, and relevant implementation. Distinguish verified facts, design choices, and open questions. If scope is unclear, investigate what does not depend on an answer and ask only questions that affect the plan.
-2. Record the goal, edit boundaries, explicit exclusions, and important interfaces, compatibility constraints, and decision rationale that the implementer must not guess. Leave implementation details to the implementer instead of writing the whole solution in advance.
+2. Record the goal, edit boundaries, explicit exclusions, and important interfaces, compatibility constraints, and decision rationale that the implementer must not guess. Explain the intended mechanism to the user as above, while leaving routine coding details to the implementer instead of writing the whole solution in advance.
 3. Divide the work into verifiable outcomes. Define a validation method and passing condition for each. Use tests, manual checks, or artifact inspection according to risk; do not add tests merely to satisfy a process.
 4. Check that every requirement has a corresponding task and mark the next step. Use the explicit handoff format in SKILL.md, then end the planning stage. State whether approval is still pending; a finished plan is not implementation authorization. If the user already requested authorized implementation, continue that stage without inserting another planning approval gate.
 
@@ -58,4 +81,8 @@ Update the document at handoff, after meaningful progress, when a key decision c
 
 Review according to the user's request without automatically making another model call. Compare the actual changes, scope, and acceptance evidence with the plan. For each finding, identify its location, impact, and evidence. If no issues are found, state the review scope and remaining validation limits. If revisions invalidate earlier evidence, rerun the relevant checks.
 
+Separate required corrections to agreed behavior/acceptance from optional improvements and new requirements. Required findings must explain a concrete failure or unmet criterion; preferences and speculative additions do not automatically block delivery. Routine corrections within the same scope continue the same plan without restarting full planning. Recommend another review when risk or unresolved evidence justifies it, not simply because a round ended. Once the agreed scope and required checks are satisfied, close the task; keep optional follow-ups explicit rather than growing the acceptance target. Review alone still does not authorize implementation edits.
+
 Report only completed work, actual validation results, unfinished or pending decisions, and the task document's location. Keep full logs in files. If required acceptance checks are incomplete, say "implementation complete, acceptance pending" instead of claiming the entire task is done. Label local tests, remote CI, platform-specific checks, and real service calls separately; none substitutes for another.
+
+Explain the delivered behavior against what was proposed, any deviation and its reason, the evidence, and how the user can try the result. Use meaningful progress descriptions instead of only filenames, test counts or finding IDs.

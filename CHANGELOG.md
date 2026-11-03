@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.0 — 2026-11-03
+
+- Explain overall progress, concrete implementation logic and verification before an implementation handoff; use descriptive names and report actual outcomes against the proposal.
+- Reuse the established application workspace, suitable environments and launch entry point; distinguish task-document folders from application copies and explain necessary isolation.
+- Separate required review fixes from optional improvements and new scope, keeping routine corrections in the same plan without unnecessary planning cycles.
+
 ## v0.2.0 — 2026-10-29
 
 - Keep one installed skill with three modes: plan-switch, plan-summary and plan-clean.

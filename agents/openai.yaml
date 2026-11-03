@@ -1,4 +1,4 @@
 interface:
   display_name: "Plan Handoff"
   short_description: "Switch models, summarize plans, and archive covered work"
-  default_prompt: "Use $plan-handoff in plan-switch, plan-summary, or plan-clean mode according to my request. Preserve active plans and clearly name the next stage and required model role; I switch models manually."
+  default_prompt: "Use $plan-handoff for my requested mode: explain the change plainly, reuse the established project and environment, preserve active plans, and name the next stage and model role when a handoff is needed; I switch models manually."

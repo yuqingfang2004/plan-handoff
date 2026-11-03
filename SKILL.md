@@ -23,6 +23,7 @@ For combined summary and cleanup requests, read both relevant rules and preserve
 ## Shared document rules
 
 - Each task has a dedicated `plan.md`. Existing user plans and notes are sources, not progress logs, unless explicitly requested. New plans default to `handoffs/YYYY-MM-DD-<topic>/plan.md`; continue existing dedicated plans at their paths. Keep one current entry point per task.
+- Task folders hold documents, not a new copy of the application. Continue in the established project workspace, reuse its appropriate environment and keep the user's launch entry point stable; explain any necessary isolation or change before proceeding within authorization.
 - Use the actual designated plan collection, whether named `handoff`, `handoffs`, or otherwise. Do not create a second collection because its name differs. Exclude its `archive/` from ordinary scans.
 - Implementing, blocked, awaiting acceptance/review/planning, and unknown plans remain active or protected. Modification age alone never makes a task inactive. Closed statuses are completed, cancelled, and superseded; the latter two do not mean implemented.
 - Preserve existing work, version evidence, and relevant authorization. Coordinate conflicting writers; do not independently change models, dispatch subagents, contact sessions, change branches, or publish.
@@ -31,6 +32,8 @@ For combined summary and cleanup requests, read both relevant rules and preserve
 ## Make every handoff explicit
 
 Before ending an actual stage handoff, update the same plan and display this block prominently in the user's language. Both the block AND the copyable prompt must name the next stage and model role. A vague "continue" or a path alone is insufficient.
+
+For plan-switch, first explain the overall progress and this round's intended change in plain language, including the implementation approach and how success will be checked. The user should understand the work before seeing the model-switch prompt; a file path or opaque issue code alone is not an explanation. Follow the concise briefing and workspace rules in [plan-switch](references/plan-switch.md).
 
 ```text
 Current stage: <stage and completion/acceptance state>; authorization: <confirmed or pending>
@@ -41,7 +44,7 @@ Plan: <exact plan path, and project root when needed>
 
 Copyable prompt:
 Use $plan-handoff in <mode>. The next stage is [<stage>], using the [<model role>].
-Read <exact plan path>, check the workspace, <stage-specific action>, and update the same plan.
+Read <exact plan path>, check the recorded project/environment, <stage-specific action with a descriptive outcome>, and update the same plan.
 <Existing authorization, pending approval, and scope limits.>
 ```
 

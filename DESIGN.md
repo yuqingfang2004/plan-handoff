@@ -20,6 +20,24 @@ independent goals get linked plans. Reopen incorrect completion, record importan
 decisions, and retain evidence without appending every conversation. User-owned
 plans and notes are references unless their edit was explicitly requested.
 
+## Explain changes and preserve the working application
+
+An implementation handoff is preceded by a user-facing explanation: overall
+position, concrete before/after behavior, proposed mechanism, important tradeoff
+and verification scenario. Direct implementation gets the same explanation before
+substantive edits; unchanged explanations are acknowledged rather than repeated.
+Names describe work, with IDs only as secondary references. Delivery compares
+actual outcomes with the proposal and supplies the user's practical entry point.
+Required review fixes, optional improvements and new scope are kept distinct;
+completion is based on agreed acceptance, not a mandatory number of review rounds.
+
+The task-document lifecycle does not create an application lifecycle. Source
+workspace, suitable environments and launch entry point persist across iterations.
+Environment changes require a concrete dependency or repair need. Necessary
+isolation records its reason, canonical project, integration path and temporary
+artifact ownership; it does not authorize additional copies, service operations
+or environment cleanup by itself.
+
 ## Summary and cleanup
 
 Inactive means completed, cancelled or superseded, subject to evidence and
@@ -68,6 +86,17 @@ relative members, and does not use extractall.
 
 Keep the complete folder when installing; moving only the old two-file core no
 longer includes the mode references. Removing optional Codex metadata is supported.
+
+## v0.3.0 guidance validation — 2026-11-03
+
+The transparency/workspace revision changes instructions, template, UI prompt and
+documentation only. Author scenario review checks explanatory handoffs, direct
+authorized edits, subsequent review rounds, optional findings, workspace/environment
+reuse, necessary isolation and stable launch instructions. Format, local links,
+metadata and relocation are checked; helper/test bytes remain unchanged.
+These checks do not establish fresh-session model behavior or measured storage/cost
+reduction. The v0.2.0 helper results below remain historical evidence, not tests of
+the new guidance.
 
 ## v0.2.0 validation — 2026-10-29
 

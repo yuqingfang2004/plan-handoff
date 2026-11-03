@@ -77,6 +77,16 @@ Use $plan-handoff to implement handoffs/2026-10-29-csv-export/plan.md.
 
 The same conversation and a fresh conversation can both use the task file. New sessions need access to the project, plan, and applicable instructions. Invocation syntax depends on the host.
 
+## Understand each iteration and keep the app usable
+
+Before asking you to switch to implementation, the agent explains the overall progress, the concrete change, how the proposed logic works, the key tradeoff and a scenario that will verify it. Directly authorized implementation gets the same brief explanation before substantive edits. Small changes need only a few sentences; later rounds explain the new difference rather than repeating the entire plan. Task names describe behavior; codes such as R2 are optional tracking aids.
+
+For example: "The parser currently reads status examples as task metadata. I will read only the opening metadata and skip code blocks and comments. Unknown status will keep the original plan. A still-active plan containing a completed-status example must remain protected." This explains the mechanism rather than just saying "fix R1 and add tests."
+
+The agent continues in the established application workspace, reuses suitable environments and keeps your launch entry point stable. A task-document folder does not contain another application copy. Dependencies are updated when needed, using the existing project tooling; environment recreation is not a per-round step. Necessary isolation has a stated reason, an integration path back to the canonical project, and a retention/cleanup boundary.
+
+Delivery compares the actual behavior with the proposal, explains any deviation, and tells you how to try it using the recorded directory, environment and command. Any required restart or dependency change is explicit, and untested launch instructions are labeled. Review distinguishes required fixes from optional improvements and new requests, so suggestions do not indefinitely extend the task. These explanations reuse the same plan and do not add an approval step to already-authorized work.
+
 ## Installation
 
 Put this folder in your client's skill directory under the name `plan-handoff`. Keep the repository folder intact, including [SKILL.md](SKILL.md), [references](references/plan-switch.md), [templates/plan.md](templates/plan.md), [templates/summary.md](templates/summary.md) and [scripts/plan_store.py](scripts/plan_store.py). Skill instructions, discovery and display metadata, and the task template are in English. A Chinese README is available separately.

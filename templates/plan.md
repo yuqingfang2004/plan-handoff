@@ -13,6 +13,15 @@
 - Included and excluded work:
 - Existing authorization and actions requiring separate confirmation:
 
+## Explain this round
+
+> Keep a concise explanation the user can understand, and present it in chat before implementation or its handoff. Prefer descriptive names to codes. On subsequent rounds, update the new difference rather than repeating the whole history.
+
+- Overall goal, delivered capabilities and what remains; why this round is needed:
+- Current behavior/problem and intended outcome; established facts versus hypotheses:
+- Proposed flow or decision changes, key component responsibilities, and important tradeoff:
+- Concrete validation scenario and any unresolved decision:
+
 ## Workspace
 
 - Project root and cross-machine path mappings, if applicable:
@@ -20,6 +29,9 @@
 - Existing uncommitted changes, their ownership, and anything uncertain:
 - Applicable project rules and relevant files or symbols:
 - Source plans or handoff notes and the confirmed constraints taken from them:
+- Existing environment(s), dependency manager and lockfiles; reuse/update needs (record locations, not secrets):
+- Stable user entry point, when applicable: working directory, environment selection, launch command, URL/port; what was actually verified:
+- If isolation is necessary: reason, canonical/temporary locations, integration path and authorized cleanup conditions. Otherwise continue in the existing project; do not copy it into the task-document folder.
 
 ## Decisions and open questions
 
@@ -39,6 +51,7 @@ Suggested statuses: not started, in progress, implementation complete / acceptan
 
 - Current completed work (replace stale summaries rather than appending every session):
 - In progress, awaiting acceptance, or blocked; write "none" if empty:
+- Actual behavior versus the proposed change, any deviation and reason; how the user can try it and any required restart/dependency update:
 - Next stage: planning/decision / implementation / review / finished.
 - Required model role: planning model / implementation model / review model / none; preferred model if known:
 - Manual action: select the required role's model; if already selected, no switch is needed.
@@ -56,6 +69,6 @@ Include only evidence relevant to this task. Note when new changes invalidate ea
 
 Incomplete acceptance checks and reasons:
 
-Review conclusion and scope, only when the user requests a review:
+Review conclusion and scope, only when the user requests a review: distinguish required acceptance fixes from optional improvements and new requirements; explain findings with descriptive names and concrete consequences.
 
 Completion or closure summary, when applicable: outcome, remaining limits, evidence, and follow-up link. Reopening or superseding the task must retain the reason and identify any invalid prior acceptance.
