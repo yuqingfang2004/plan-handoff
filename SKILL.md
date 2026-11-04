@@ -33,7 +33,7 @@ For combined summary and cleanup requests, read both relevant rules and preserve
 
 Before ending an actual stage handoff, update the same plan and display this block prominently in the user's language. Both the block AND the copyable prompt must name the next stage and model role. A vague "continue" or a path alone is insufficient.
 
-For plan-switch, first explain the overall progress and this round's intended change in plain language, including the implementation approach and how success will be checked. The user should understand the work before seeing the model-switch prompt; a file path or opaque issue code alone is not an explanation. Follow the concise briefing and workspace rules in [plan-switch](references/plan-switch.md).
+For plan-switch, the final handoff response must explain the proposed work in ordinary prose BEFORE the model-role block and copyable prompt. Make that response self-contained: progress messages, the plan file and text inside the copyable prompt do not substitute for the explanation. Include the concrete goal, how the relevant input moves through the changed logic to the result, important failure/edge handling and a verification example. A goal, file list or promise to add tests alone is incomplete. Use the explanation criteria in [plan-switch](references/plan-switch.md); brevity must not remove the implementation mechanism.
 
 ```text
 Current stage: <stage and completion/acceptance state>; authorization: <confirmed or pending>

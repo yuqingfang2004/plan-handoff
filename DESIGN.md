@@ -24,7 +24,10 @@ plans and notes are references unless their edit was explicitly requested.
 
 An implementation handoff is preceded by a user-facing explanation: overall
 position, concrete before/after behavior, proposed mechanism, important tradeoff
-and verification scenario. Direct implementation gets the same explanation before
+and verification scenario. The final handoff body is self-contained and precedes the
+copyable prompt: it traces a representative input through changed logic to the
+result, including important failure handling. Earlier progress messages or the plan
+file cannot substitute for it. Direct implementation gets the same explanation before
 substantive edits; unchanged explanations are acknowledged rather than repeated.
 Names describe work, with IDs only as secondary references. Delivery compares
 actual outcomes with the proposal and supplies the user's practical entry point.

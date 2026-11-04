@@ -15,11 +15,11 @@
 
 ## Explain this round
 
-> Keep a concise explanation the user can understand, and present it in chat before implementation or its handoff. Prefer descriptive names to codes. On subsequent rounds, update the new difference rather than repeating the whole history.
+> Keep a concise explanation the user can understand, and present it in the final handoff response body before the model-role block and prompt; earlier progress messages and this file are not substitutes. For directly authorized work, explain before editing. Prefer descriptive names to codes. On subsequent rounds, update the new difference rather than repeating the whole history.
 
 - Overall goal, delivered capabilities and what remains; why this round is needed:
 - Current behavior/problem and intended outcome; established facts versus hypotheses:
-- Proposed flow or decision changes, key component responsibilities, and important tradeoff:
+- Implementation walkthrough: representative input/action → responsible components and changed checks/state → output; important failure/edge path and why this approach fits (mark unknowns):
 - Concrete validation scenario and any unresolved decision:
 
 ## Workspace

@@ -79,7 +79,7 @@ The same conversation and a fresh conversation can both use the task file. New s
 
 ## Understand each iteration and keep the app usable
 
-Before asking you to switch to implementation, the agent explains the overall progress, the concrete change, how the proposed logic works, the key tradeoff and a scenario that will verify it. Directly authorized implementation gets the same brief explanation before substantive edits. Small changes need only a few sentences; later rounds explain the new difference rather than repeating the entire plan. Task names describe behavior; codes such as R2 are optional tracking aids.
+Before asking you to switch to implementation, the agent explains the overall progress, the concrete change, how the proposed logic works, the key tradeoff and a scenario that will verify it. Directly authorized implementation gets the same brief explanation before substantive edits. Small changes need only a few sentences; later rounds explain the new difference rather than repeating the entire plan. Task names describe behavior; codes such as R2 are optional tracking aids. The final handoff response must contain this explanation in ordinary prose before the copyable prompt. It traces an input through the changed checks or state to the result, includes important failure handling and a verification example; a goal summary, earlier progress message or plan link is insufficient.
 
 For example: "The parser currently reads status examples as task metadata. I will read only the opening metadata and skip code blocks and comments. Unknown status will keep the original plan. A still-active plan containing a completed-status example must remain protected." This explains the mechanism rather than just saying "fix R1 and add tests."
 

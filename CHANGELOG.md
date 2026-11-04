@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.1 — 2026-11-04
+
+- Require a self-contained explanation in the final handoff body before the copyable prompt, including a concrete implementation walkthrough, important failure handling and a verification example; goal-only summaries and earlier progress messages do not satisfy this requirement.
+
 ## v0.3.0 — 2026-11-03
 
 - Explain overall progress, concrete implementation logic and verification before an implementation handoff; use descriptive names and report actual outcomes against the proposal.
